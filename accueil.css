@@ -1,0 +1,31 @@
+header {
+  width: 100%;
+  position: fixed; /* Fixe la navbar en haut */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* S'assure qu'elle reste au-dessus des autres éléments */
+}
+
+header nav {
+  width: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 15px 0; /* Un peu plus de hauteur pour un meilleur rendu */
+}
+
+header nav a {
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header nav a.active,
+header nav a:hover {
+  background-color: rgba(255, 215, 0, 0.2);
+  color: white;
+}
