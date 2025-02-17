@@ -18,7 +18,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "quiz_night";
+$dbname = "livreor";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -32,21 +32,21 @@ try {
 $error_msg = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['pass'] ?? '';
+    $login = $_POST['login'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    if (!empty($username) && !empty($password)) {
+    if (!empty($login) && !empty($password)) {
         // Requête sécurisée pour éviter les injections SQL
-        $stmt = $bdd->prepare("SELECT * FROM users WHERE username = :username AND pass = :password");
+        $stmt = $bdd->prepare("SELECT * FROM user WHERE login = :login AND password = :password");
         $stmt->execute([
-            'username' => $username,
+            'login' => $login,
             'password' => $password,
         ]);
 
         $rep = $stmt->fetch();
         if ($rep) {
-            $_SESSION['username'] = $username;
-            header ("Location: index_logged.php");
+            $_SESSION['login'] = $login;
+            header ("Location: accueil.html");
             exit;
 
         } else {
@@ -70,11 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <form method="POST" action="">
     <h3 class="titre_connexion">Page de connexion</h3>
-    <label for="username"><b>Username</b></label>
-    <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+    <label for="login"><b>Login</b></label>
+    <input type="text" id="login" name="login" placeholder="Entrez votre nom d'utilisateur" required>
     <br>
     <label for="password"><b>Password</b></label>
-    <input type="password" id="pass" name="pass" placeholder="Entrez votre mot de passe" required>
+    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
     <br>
     <input type="submit" value="Se connecter" name="ok">
     <a href="inscription.php">Vous n’êtes pas encore inscrit ?</a>
