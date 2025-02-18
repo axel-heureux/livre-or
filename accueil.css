@@ -1,92 +1,340 @@
-/* Styles généraux de la page d'accueil */
-
-/* Style du corps de la page */
-body {
-  background-image: url(assets/images/background.jpg);
-  background-size: cover; /* Ajuste l’image pour couvrir tout l’écran */
-  background-position: center; /* Centre l’image */
-  background-repeat: no-repeat; /* Empêche la répétition */
-  font-family: Arial, sans-serif;
-  background-color: #1a1a1a; /* Fond sombre */
-  color: white; /* Texte en blanc */
+/* ✅ RESET DE STYLE */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  list-style: none;
 }
 
-/* Styles de l'en-tête */
-header {
-  width: 100%;
-  background-color: black;
-  padding: 15px 0;
+/* ✅ HEADER */
+.header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-}
-
-header nav {
+  width: 100%;
+  padding: 20px 10%;
+  background: rgba(0, 0, 0, 0.81);
+  backdrop-filter: blur(10px);
   display: flex;
-  justify-content: center;
-  gap: 50px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
 
-header nav a {
-  color: gold;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+span {
+  color: #673ab7;
 }
 
-header nav a.active {
-  background-color: rgba(255, 215, 0, 0.2);
+/* LOGO */
+.logo {
+  font-size: 25px;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.logo:hover {
+  color: #673ab7;
+  text-shadow: 0 0 25px #673ab7;
+  transform: scale(1.1);
+}
+
+/* MENU */
+.navbar a {
+  font-size: 18px;
+  color: white;
+  font-weight: 500;
+  margin: 0 15px;
+  border-bottom: 3px solid transparent;
+  transition: 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #673ab7;
+  border-bottom: 3px solid #673ab7;
+}
+
+/* BOUTON LOGIN */
+.contact {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.contact:hover {
+  background-color: #673ab7;
+  box-shadow: 0 0 15px #673ab7;
   color: white;
 }
 
-header nav a:hover {
-  background-color: rgba(255, 215, 0, 0.4);
-  color: black;
+/* ✅ BACKGROUND PRINCIPAL */
+body {
+  background-image: url("assets/images/fond_dark.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-/* Styles pour le contenu principal */
-main {
-  padding-top: 80px; /* Ajouter de l'espace pour que l'en-tête ne cache pas le contenu */
+/* ✅ SECTION ACCUEIL */
+.home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5em;
+  padding: 50px 10%;
+  flex-wrap: wrap;
   text-align: center;
 }
 
-h1 {
-  font-size: 3rem;
-  color: gold;
+.home-content {
+  max-width: 800px;
+  color: white;
 }
 
-p {
-  font-size: 1.2rem;
+.home-content h2 {
+  font-size: 42px;
+}
+
+.home-content h3 {
+  font-size: 32px;
+  margin: 10px 0;
+}
+
+.home-content p {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+/* BOUTONS */
+.btn-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
   margin-top: 20px;
-  color: #ccc;
 }
 
-/* Bouton d'appel à l'action */
-a.cta {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: gold;
-  color: black;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 30px;
+.btn-1, .btn-2 {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-a.cta:hover {
-  background-color: #ffd700;
-}
-
-/* Footer */
-footer {
+.btn-1 {
   background-color: black;
-  padding: 15px;
-  color: #ddd;
+  color: white;
+  border: 2px solid black;
+}
+
+.btn-1:hover {
+  background-color: white;
+  color: black;
+}
+
+.btn-2 {
+  background-color: #673ab7;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.btn-2:hover {
+  background-color: white;
+  color: #673ab7;
+}
+
+.btn-3 {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-color: #673ab7; /* Couleur de fond similaire à btn-2 */
+  color: white;
+  border: 2px solid transparent;
+}
+
+.btn-3:hover {
+  background-color: white;
+  color: #673ab7;
+  border: 2px solid #673ab7; /* Ajouter une bordure au hover comme btn-2 */
+}
+
+/* IMAGE D'ACCUEIL */
+.img-box img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10%;
+}
+
+/* ✅ SECTION QUIZ */
+.quiz {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-top: 40px;
+  padding: 50px 10%;
+}
+
+.quiz-content {
+  color: white;
+  margin-bottom: 30px;
+}
+
+.quiz-content h2 {
+  font-size: 38px;
+}
+
+.quiz-content p {
+  font-size: 18px;
+}
+
+/* ✅ CARDS QUIZ */
+.quiz-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.quiz-card {
+  background: #673ab7;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 250px;
+  transition: 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-10px);
+}
+
+.quiz-card h3 {
+  font-size: 20px;
+  margin: 10px 0;
+  color: white;
+}
+
+.quiz-card p {
+  font-size: 16px;
+  color: white;
+}
+
+.quiz-card small {
+  font-size: 14px;
+  color: white;
+}
+
+/* ✅ BOUTON QUIZ */
+.btn-quiz {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #512da8;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btn-quiz:hover {
+  background: #3d1a8b;
+}
+
+/* ✅ FOOTER */
+.footer {
+  width: 100%;
+  padding: 20px 10%;
+  background-color: white;
+  text-align: center;
+}
+
+.footer .social a {
+  font-size: 24px;
+  color: black;
+  border: 2px solid #673ab7;
+  width: 40px;
+  height: 40px;
+  line-height: 38px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0 5px;
+  transition: 0.3s ease;
+}
+
+.footer .social a:hover {
+  transform: scale(1.2);
+  color: #673ab7;
+}
+
+.footer ul {
+  font-size: 18px;
+}
+
+.footer ul li a {
+  color: black;
+}
+
+.footer ul li a:hover {
+  border-bottom: 3px solid #673ab7;
+}
+
+/* ✅ SCROLLBAR PERSONNALISÉE */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #673ab7;
+  border-radius: 10px;
+}
+
+/* ✅ RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .header {
+      padding: 20px 5%;
+  }
+
+  .home, .quiz {
+      padding: 50px 5%;
+  }
+
+  .btn-box {
+      flex-direction: column;
+      gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+      flex-direction: column;
+      gap: 3em;
+      text-align: center;
+  }
+
+  .home-content h2 {
+      font-size: 32px;
+  }
+
+  .home-content h3 {
+      font-size: 24px;
+  }
+
+  .quiz-content h2 {
+      font-size: 28px;
+  }
 }
