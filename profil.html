@@ -3,23 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="accueil.css">
-    <title>Accueil</title>
+    <link rel="stylesheet" href="index.css"> <!-- Le bon fichier CSS pour la page -->
+    <title>Profil</title>
 </head>
 <body>
+
     <header>
         <nav>
-            <a class="active" href="accueil.html">Accueil</a>
+            <a href="accueil.html">Accueil</a>
             <a href="profil.html">Profil</a>
             <a href="commentaires.html">Commentaires</a>
             <a href="livre-or.html">Livre-or</a>
         </nav>
     </header>
-    <main>
 
-    </main>
-    <footer>
+    <section class="form-section">
+        <h1>Modifier votre Login et Mot de Passe</h1>
+        <form action="traitement_formulaire.php" method="POST">
+            <div class="form-group">
+                <label for="login">Nouveau Login :</label>
+                <input type="text" id="login" name="login" required>
+            </div>
 
-    </footer>
+            <div class="form-group">
+                <label for="password">Nouveau Mot de Passe :</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirmer le Mot de Passe :</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+
+            <button type="submit">Mettre à jour</button>
+        </form>
+    </section>
+
 </body>
 </html>
