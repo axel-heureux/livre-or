@@ -1,0 +1,112 @@
+
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(assets/images/background.jpg);
+    background-size: cover; /* Ajuste l’image pour couvrir tout l’écran */
+    background-position: center; /* Centre l’image */
+    background-repeat: no-repeat; /* Empêche la répétition */
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Fond sombre */
+    color: white;
+    line-height: 1.6;
+}
+
+header {
+    width: 100%;
+    background-color: black;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav a {
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header nav a:hover,
+header nav a.active {
+    background-color: gold;
+    color: black;
+    border-radius: 5px;
+}
+
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #222;
+    border-radius: 8px;
+}
+
+.comment-section h1 {
+    text-align: center;
+    color: gold;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.comment-form label {
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+.comment-form input,
+.comment-form textarea {
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.comment-form button:hover {
+    background-color: #ffcc00;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+.comment {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.2);
+}
+
+.comment p {
+    color: #ddd;
+}
+
+.comment strong {
+    color: gold;
+}
