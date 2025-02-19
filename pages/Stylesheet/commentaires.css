@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url(assets/images/background.jpg);
+    background-image: url(images/background.jpg);
     background-size: cover; /* Ajuste l’image pour couvrir tout l’écran */
     background-position: center; /* Centre l’image */
     background-repeat: no-repeat; /* Empêche la répétition */

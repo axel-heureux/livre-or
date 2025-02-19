@@ -1,25 +1,35 @@
+<?php
+session_start();
+require 'config.php';
+
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css"> <!-- Le bon fichier CSS pour la page -->
+    <link rel="stylesheet" href="Stylesheet/index.css"> <!-- Le bon fichier CSS pour la page -->
     <title>Profil</title>
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="accueil.html">Accueil</a>
-            <a href="profil.html">Profil</a>
-            <a href="commentaires.html">Commentaires</a>
-            <a href="livre-or.html">Livre-or</a>
+            <a href="accueil.php">Accueil</a>
+            <a href="profil.php">Profil</a>
+            <a href="commentaires.php">Commentaires</a>
+            <a href="livre-or.php">Livre-or</a>
         </nav>
     </header>
 
     <section class="form-section">
         <h1>Modifier votre Login et Mot de Passe</h1>
-        <form action="traitement_formulaire.php" method="POST">
+        <form action="edit_login.php" method="POST">
             <div class="form-group">
                 <label for="login">Nouveau Login :</label>
                 <input type="text" id="login" name="login" required>
