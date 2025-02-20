@@ -34,7 +34,6 @@ $comments = $pdo->query("SELECT user.login, comment.comment, comment.date FROM c
             <a href="profil.php">Profil</a>
             <a class="active" href="commentaires.php">Commentaires</a>
             <a href="livre-or.php">Livre-or</a>
-            <a href="logout.php" class="logout-btn">Déconnexion</a> <!-- Bouton de déconnexion -->
         </nav>
     </header>
     <main>
