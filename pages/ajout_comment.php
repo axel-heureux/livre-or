@@ -3,8 +3,8 @@ session_start();
 require 'config.php'; // Connexion à la base de données
 
 // Vérifier que l'utilisateur est connecté
-if (!isset($_SESSION['login'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['user']['login'])) {
+    //header("Location: login.php");
     exit();
 }
 
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($auteur) && !empty($message)) {
         // Récupérer l'ID de l'utilisateur connecté à partir de la table "user"
         $stmt = $pdo->prepare("SELECT id FROM user WHERE login = ?");
-        $stmt->execute([$_SESSION['login']]);
+        $stmt->execute([$_SESSION['user']['login']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {

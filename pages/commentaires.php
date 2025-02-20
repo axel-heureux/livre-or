@@ -34,6 +34,7 @@ $comments = $pdo->query("SELECT user.login, comment.comment, comment.date FROM c
             <a href="profil.php">Profil</a>
             <a class="active" href="commentaires.php">Commentaires</a>
             <a href="livre-or.php">Livre-or</a>
+            <a href="logout.php" class="logout-btn">Déconnexion</a> <!-- Bouton de déconnexion -->
         </nav>
     </header>
     <main>
@@ -41,7 +42,7 @@ $comments = $pdo->query("SELECT user.login, comment.comment, comment.date FROM c
             <h1>Vos Commentaires</h1>
             <form action="ajout_comment.php" method="POST" class="comment-form">
                 <label for="auteur">Votre Nom :</label>
-                <input type="text" id="auteur" name="auteur" required>
+                <input type="text" id="auteur" name="auteur" value="<?= $_SESSION['user']['login']; ?>" required>
                 <label for="message">Votre Commentaire :</label>
                 <textarea id="message" name="message" rows="4" required></textarea>
                 <button type="submit">Envoyer</button>

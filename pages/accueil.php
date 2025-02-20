@@ -1,9 +1,9 @@
 <?php
-session_start();
 require 'config.php';
+session_start();
 
 // Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }
@@ -30,7 +30,7 @@ if (!isset($_SESSION['login'])) {
 
     <section class="home">
         <div class="home-content">
-            <h1>✨ Bienvenue, <?php echo htmlspecialchars($_SESSION['login']); ?> ! ✨</h1>
+            <h1>✨ Bienvenue, <?php echo htmlspecialchars($_SESSION['user']['login']); ?> ! ✨</h1>
             <p>📖 Partagez votre avis et découvrez ceux des autres ! Connectez-vous pour :</p>
             <ul>
                 <li>✅ Écrire un commentaire  📝 </li>

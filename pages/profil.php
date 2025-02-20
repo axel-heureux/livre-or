@@ -1,11 +1,8 @@
 <?php
+require 'config.php'; // Connexion à la base de données
 session_start();
-require 'config.php';
 
-if (!isset($_SESSION['login'])) {
-    header("Location: login.php");
-    exit();
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +30,7 @@ if (!isset($_SESSION['login'])) {
         <form action="edit_login.php" method="POST">
             <div class="form-group">
                 <label for="login">Nouveau Login :</label>
-                <input type="text" id="login" name="login" required>
+                <input type="text" id="login" name="login" value="<?= $_SESSION['user']['login']; ?>" required>
             </div>
 
             <div class="form-group">

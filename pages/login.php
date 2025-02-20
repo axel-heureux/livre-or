@@ -37,18 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($login) && !empty($password)) {
         // Requête sécurisée pour éviter les injections SQL
-        $stmt = $bdd->prepare("SELECT * FROM user WHERE login = :login AND password = :password");
+        $stmt = $bdd->prepare("SELECT * FROM user WHERE login = :login");
         $stmt->execute([
-            'login' => $login,
-            'password' => $password,
+            'login' => $login
         ]);
 
-        $rep = $stmt->fetch();
-        if ($rep) {
-            $_SESSION['login'] = $login;
-            header ("Location: accueil.php?user_id=");
-            exit;
-
+        $rep = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($password, $rep['password'])) {
+            $_SESSION['user'] = $rep;
+            header("Location: accueil.php");
         } else {
             $error_msg = "Nom d'utilisateur ou mot de passe incorrect !";
         }
@@ -69,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <form method="POST" action="">
-    <h3 class="titre_connexion">Page de connexion</h3>
+    <h3 class="titre_connexion">Connexion</h3>
     <label for="login"><b>Login</b></label>
     <input type="text" id="login" name="login" placeholder="Entrez votre nom d'utilisateur" required>
     <br>
