@@ -1,8 +1,15 @@
 <?php
 session_start();
-session_unset();
-session_destroy();
-setcookie(session_name(), '', time() - 3600, '/');
-header("Location: login.php");
-exit();
+
+class UserLogout {
+    public static function logout(): void {
+        session_unset();
+        session_destroy();
+        setcookie(session_name(), '', time() - 3600, '/');
+        header("Location: login.php");
+        exit();
+    }
+}
+
+UserLogout::logout();
 ?>

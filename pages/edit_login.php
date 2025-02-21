@@ -24,12 +24,10 @@ class UserProfile {
     }
 
     public function updateProfile(string $newLogin, string $newPassword): bool {
-        // Optionnel : vérifier la validité du mot de passe
         if (strlen($newPassword) < 6) {
             throw new InvalidArgumentException("Le mot de passe doit comporter au moins 6 caractères.");
         }
 
-        // Hashage du mot de passe
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         try {
@@ -45,7 +43,6 @@ class UserProfile {
     }
 }
 
-// Connexion à la base de données
 $host = '127.0.0.1';
 $dbname = 'livreor';
 $username = 'root';
@@ -53,30 +50,22 @@ $password = '';
 $db = new Database($host, $dbname, $username, $password);
 $conn = $db->getConnection();
 
-// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user']['id'])) {
     echo "Vous devez être connecté pour modifier votre profil.";
     exit;
 }
 
-// Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Récupérer les nouvelles valeurs du formulaire
         $newLogin = htmlspecialchars($_POST['login']);
         $newPassword = htmlspecialchars($_POST['password']);
 
         $userProfile = new UserProfile($conn, $_SESSION['user']['id']);
         if ($userProfile->updateProfile($newLogin, $newPassword)) {
-            // Rediriger l'utilisateur après la mise à jour
             header("Location: login.php");
             exit();
         }
-
-    } catch (InvalidArgumentException $e) {
-        echo $e->getMessage();
-        exit;
-    } catch (RuntimeException $e) {
+    } catch (InvalidArgumentException | RuntimeException $e) {
         echo $e->getMessage();
         exit;
     }

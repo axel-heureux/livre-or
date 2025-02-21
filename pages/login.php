@@ -5,47 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheet/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">	
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='font'>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Connexion</title>
 </head>
 <body>
-
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "livreor";
-
-try {
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
-    exit;
+class Database {
+    private PDO $conn;
+    public function __construct(string $host, string $dbname, string $username, string $password) {
+        try {
+            $this->conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Erreur de connexion : " . $e->getMessage());
+        }
+    }
+    public function getConnection(): PDO {
+        return $this->conn;
+    }
 }
 
+class UserAuthentication {
+    private PDO $conn;
+    public function __construct(PDO $conn) {
+        $this->conn = $conn;
+    }
+    public function loginUser(string $login, string $password): ?array {
+        $stmt = $this->conn->prepare("SELECT * FROM user WHERE login = :login");
+        $stmt->execute(['login' => $login]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($user && password_verify($password, $user['password'])) ? $user : null;
+    }
+}
 
+$database = new Database('localhost', 'livreor', 'root', '');
+$conn = $database->getConnection();
+$auth = new UserAuthentication($conn);
 $error_msg = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST['login'] ?? '';
     $password = $_POST['password'] ?? '';
-
     if (!empty($login) && !empty($password)) {
-        // Requête sécurisée pour éviter les injections SQL
-        $stmt = $bdd->prepare("SELECT * FROM user WHERE login = :login");
-        $stmt->execute([
-            'login' => $login
-        ]);
-
-        $rep = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (password_verify($password, $rep['password'])) {
-            $_SESSION['user'] = $rep;
+        $user = $auth->loginUser($login, $password);
+        if ($user) {
+            $_SESSION['user'] = $user;
             header("Location: accueil.php");
+            exit;
         } else {
             $error_msg = "Nom d'utilisateur ou mot de passe incorrect !";
         }
@@ -55,15 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!-- Header du site -->
 <header class="header">
-		<!-- Logo -->
-		<a href="index.php" class="logo"><span>Livre</span>D'or</a>
-
-		<!-- Bouton de contact -->
-		<a href="login.php" class="contact">Login</a>
-	</header>
-
+    <a href="index.php" class="logo"><span>Livre</span>D'or</a>
+    <a href="login.php" class="contact">Login</a>
+</header>
 
 <form method="POST" action="">
     <h3 class="titre_connexion">Connexion</h3>
@@ -76,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="submit" value="Se connecter" name="ok">
     <a href="inscription.php">Vous n’êtes pas encore inscrit ?</a>
     <?php if (!empty($error_msg)) : ?>
-    <p style="color: red;"><?php echo htmlspecialchars($error_msg); ?></p>
-<?php endif; ?>
+        <p style="color: red;"> <?php echo htmlspecialchars($error_msg); ?> </p>
+    <?php endif; ?>
 </form>
 </body>
 </html>
